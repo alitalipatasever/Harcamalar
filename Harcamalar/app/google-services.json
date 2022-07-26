@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "274117048460",
+    "project_id": "harcamalar-4ef23",
+    "storage_bucket": "harcamalar-4ef23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274117048460:android:cd9ec221939dfea5dea3a9",
+        "android_client_info": {
+          "package_name": "com.alitalipatasever.harcamalar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274117048460-0j6d8gcfgcab4gjf9v9582bd9j57ctlo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATEcubsd4Wu5ci2hGYz8zrGl3O0InIqY0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274117048460-0j6d8gcfgcab4gjf9v9582bd9j57ctlo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
