@@ -19,10 +19,11 @@ import com.google.firebase.auth.FirebaseUser;
 public class Login extends AppCompatActivity {
 
     EditText ETusername,ETpassword;
-    Button btnLogin;
+    Button btnLogin, btnRegister;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     String username,password;
+    String test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class Login extends AppCompatActivity {
         ETusername = (EditText) findViewById(R.id.username);
         ETpassword = (EditText) findViewById(R.id.password);
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnRegister = (Button) findViewById(R.id.register);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -46,6 +48,13 @@ public class Login extends AppCompatActivity {
                 }else{
                     loginFunc();
                 }
+            }
+        });
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, Register.class);
+                startActivity(intent);
             }
         });
 
