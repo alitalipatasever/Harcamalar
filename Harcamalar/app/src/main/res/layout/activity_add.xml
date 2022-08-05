@@ -6,4 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".Add">
 
+    <EditText
+        android:id="@+id/aciklama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="açıklama"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="100dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/tutar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="number|textPersonName"
+        android:hint="tutar"
+        app:layout_constraintTop_toBottomOf="@+id/aciklama"
+        tools:layout_editor_absoluteX="98dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="ADD"
+        app:layout_constraintTop_toBottomOf="@+id/tutar"
+        tools:layout_editor_absoluteX="153dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
