@@ -1,17 +1,24 @@
 package com.alitalipatasever.harcamalar;
 
+import android.content.Intent;
+
 public class Harcamalar {
 
     public String email;
     public String tarih;
     public String aciklama;
     public String tutar;
+    public String id;
 
-    public Harcamalar(String email, String tarih, String aciklama, String tutar) {
+    public Harcamalar() {
+    }
+
+    public Harcamalar(String email, String tarih, String aciklama, String tutar, String id) {
         this.email = email;
         this.tarih = tarih;
         this.aciklama = aciklama;
         this.tutar = tutar;
+        this.id = id;
     }
 
     public void setEmail(String email) {
@@ -30,6 +37,10 @@ public class Harcamalar {
         this.tutar = tutar;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -44,5 +55,9 @@ public class Harcamalar {
 
     public String getTutar() {
         return tutar;
+    }
+
+    public String getId() {
+        return id;
     }
 }

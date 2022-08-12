@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Add">
+    tools:context=".Update">
 
     <EditText
         android:id="@+id/aciklama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="açıklama"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="100dp"
-        tools:ignore="MissingConstraints" />
+        android:text="açıklama"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/tutar"
@@ -24,29 +24,32 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:inputType="number|textPersonName"
-        android:hint="tutar"
-        app:layout_constraintTop_toBottomOf="@+id/aciklama"
-        tools:layout_editor_absoluteX="98dp"
-        tools:ignore="MissingConstraints" />
+        android:inputType="textPersonName"
+        android:text="tutar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aciklama" />
 
     <Button
-        android:id="@+id/add"
+        android:id="@+id/update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="ADD"
-        app:layout_constraintTop_toBottomOf="@+id/tutar"
-        tools:layout_editor_absoluteX="153dp"
-        tools:ignore="MissingConstraints" />
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#B3B1B2"
+        android:text="update"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tutar" />
 
     <Button
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#F10555"
         android:text="delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add" />
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toEndOf="@+id/update"
+        app:layout_constraintTop_toBottomOf="@+id/tutar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,11 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ATASEVER/Documents/GitHub/Harcamalar/Harcamalar/app/src/main/res/drawable/cerceve.xml" value="0.1655" />
         <entry key="..\:/Users/ATASEVER/Documents/GitHub/Harcamalar/Harcamalar/app/src/main/res/layout/activity_add.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/ATASEVER/Documents/GitHub/Harcamalar/Harcamalar/app/src/main/res/layout/activity_delete.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/ATASEVER/Documents/GitHub/Harcamalar/Harcamalar/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/Users/ATASEVER/Documents/GitHub/Harcamalar/Harcamalar/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/ATASEVER/Documents/GitHub/Harcamalar/Harcamalar/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/ATASEVER/Documents/GitHub/Harcamalar/Harcamalar/app/src/main/res/layout/activity_profile.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/ATASEVER/Documents/GitHub/Harcamalar/Harcamalar/app/src/main/res/layout/activity_register.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/ATASEVER/Documents/GitHub/Harcamalar/Harcamalar/app/src/main/res/layout/activity_update.xml" value="0.264" />
+        <entry key="..\:/Users/ATASEVER/Documents/GitHub/Harcamalar/Harcamalar/app/src/main/res/layout/list_item.xml" value="0.264" />
         <entry key="..\:/Users/ATASEVER/StudioProjects/Harcamalar/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
       </map>
     </option>

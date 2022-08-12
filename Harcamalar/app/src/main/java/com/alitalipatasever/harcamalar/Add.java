@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class Add extends AppCompatActivity {
 
     EditText ETtutar, ETaciklama;
-    Button btnEkle;
+    Button btnEkle, btnSil;
     FirebaseDatabase database;
     DatabaseReference myRef;
     FirebaseAuth firebaseAuth;
@@ -43,6 +43,7 @@ public class Add extends AppCompatActivity {
         ETaciklama = (EditText) findViewById(R.id.aciklama);
         ETtutar = (EditText) findViewById(R.id.tutar);
         btnEkle = (Button) findViewById(R.id.add);
+        btnSil = (Button) findViewById(R.id.delete);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -70,18 +71,16 @@ public class Add extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
-
-
                         myRef.child(key).child("aciklama").setValue(aciklama);
                         myRef.child(key).child("tutar").setValue(tutar);
                         myRef.child(key).child("email").setValue(email);
                         myRef.child(key).child("tarih").setValue(tarih);
+                        myRef.child(key).child("id").setValue(key);
 
                         for (DataSnapshot ds : dataSnapshot.getChildren()){
                             String readChildKey = ds.getKey();
                             HashMap<String, String> readChild = (HashMap<String, String>) ds.getValue();
-                            Toast.makeText(getApplicationContext(),readChildKey,Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),readChildKey,Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -91,8 +90,10 @@ public class Add extends AppCompatActivity {
 
                     }
                 });
+                finish();
             }
         });
+
 
 
         //myRef.setValue("Hello, World!");
