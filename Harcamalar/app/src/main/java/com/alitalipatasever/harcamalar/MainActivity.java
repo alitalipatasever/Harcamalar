@@ -1,6 +1,7 @@
 package com.alitalipatasever.harcamalar;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,9 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,14 +28,19 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnProfile,btnAdd;
 
+    ImageButton btnProfile;
+    FloatingActionButton fabAdd;
+    TextView txtToplam, txtEmail;
+
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+    String email;
     FirebaseDatabase database;
     DatabaseReference myRef;
 
     ListView listView;
     List<Harcamalar> harcamaList;
-    String readChildKey;
 
 
     @Override
@@ -37,12 +48,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnProfile = (Button) findViewById(R.id.profile);
-        btnAdd = (Button) findViewById(R.id.add);
+
+        btnProfile = (ImageButton) findViewById(R.id.profile);
+        fabAdd = findViewById(R.id.fabAdd);
         listView = (ListView) findViewById(R.id.listview);
+        txtToplam = (TextView) findViewById(R.id.txtToplam);
+        txtEmail = (TextView) findViewById(R.id.txtEmail);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        email = firebaseAuth.getCurrentUser().getEmail();
+
+        //Email ön ad
+        String[] For_split_email = email.split("[@]");
+        for (int j = 0; j <= For_split_email.length - 1; j++)
+        {
+            //System.out.println("splited emails----------" + For_split_email[j]);
+            email = For_split_email[j];
+        }
+        email = For_split_email[0];
+        txtEmail.setText(email);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Harcamalar").child("");
+
+
 
 
         btnProfile.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Add.class);
@@ -68,21 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Harcamalar harcama = harcamaList.get(position);
 
-//                myRef.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        String readChildKey = snapshot.getKey();
-//                        HashMap<String, String> readChild = (HashMap<String, String>) snapshot.getValue();
-//                        Toast.makeText(getApplicationContext(),readChildKey,Toast.LENGTH_SHORT).show();
-//                        //readChildKey = snapshot.getKey();
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-
                 Intent intent = new Intent(getApplicationContext(),Update.class);
                 intent.putExtra("aciklama",harcama.getAciklama());
                 intent.putExtra("tutar",harcama.getTutar());
@@ -96,8 +111,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -109,6 +125,16 @@ public class MainActivity extends AppCompatActivity {
                     harcamaList.add(harcama);
                 }
 
+                float toplamTutar = 0;
+
+                for (int i = 0; i < harcamaList.size(); i++) {
+                    //if (harcamaList.get(i).getTutar() != null) {
+                        toplamTutar += Float.parseFloat(harcamaList.get(i).getTutar().replace(",","."));
+                    //}
+                }
+                txtToplam.setText(String.valueOf(toplamTutar).replace(".0","")+" ₺");
+                //Toast.makeText(MainActivity.this, "Toplam Tutar: " + String.valueOf(toplamTutar).replace(".0",""), Toast.LENGTH_SHORT).show();
+
                 CustomAdapter adapter = new CustomAdapter(MainActivity.this, harcamaList);
                 listView.setAdapter(adapter);
             }
@@ -118,27 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
-//    public void Goster(String gunAdi){
-//
-//        DatabaseReference okuma = db.getReference(gunAdi);
-//        okuma.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                Iterable<DataSnapshot> keys = snapshot.getChildren();
-//                for(DataSnapshot key: keys){
-//                    //txtcesit1.append(key.getValue().toString()+"\n");
-//                    harcama.add(key.getValue().toString());
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
 }

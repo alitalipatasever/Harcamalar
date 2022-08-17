@@ -24,11 +24,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:inputType="number|textPersonName"
         android:hint="tutar"
+        android:inputType="numberDecimal"
+        android:digits="0123456789,$"
         app:layout_constraintTop_toBottomOf="@+id/aciklama"
-        tools:layout_editor_absoluteX="98dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="98dp" />
 
     <Button
         android:id="@+id/add"
@@ -40,13 +41,4 @@
         tools:layout_editor_absoluteX="153dp"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="delete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

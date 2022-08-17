@@ -67,7 +67,22 @@ public class Add extends AppCompatActivity {
                 aciklama = ETaciklama.getText().toString();
                 tutar = ETtutar.getText().toString();
 
-                myRef.addValueEventListener(new ValueEventListener() {
+                /*myRef.child(key).child("aciklama").setValue(aciklama);
+                myRef.child(key).child("tutar").setValue(tutar);
+                myRef.child(key).child("email").setValue(email);
+                myRef.child(key).child("tarih").setValue(tarih);
+                myRef.child(key).child("id").setValue(key);*/
+
+                Harcamalar harcamalar = new Harcamalar();
+                harcamalar.setAciklama(aciklama);
+                harcamalar.setTutar(tutar);
+                harcamalar.setEmail(email);
+                harcamalar.setTarih(tarih);
+                harcamalar.setId(key);
+
+                myRef.child(key).setValue(harcamalar);
+
+                /*myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -77,11 +92,11 @@ public class Add extends AppCompatActivity {
                         myRef.child(key).child("tarih").setValue(tarih);
                         myRef.child(key).child("id").setValue(key);
 
-                        for (DataSnapshot ds : dataSnapshot.getChildren()){
-                            String readChildKey = ds.getKey();
-                            HashMap<String, String> readChild = (HashMap<String, String>) ds.getValue();
-                            //Toast.makeText(getApplicationContext(),readChildKey,Toast.LENGTH_SHORT).show();
-                        }
+//                        for (DataSnapshot ds : dataSnapshot.getChildren()){
+//                            String readChildKey = ds.getKey();
+//                            HashMap<String, String> readChild = (HashMap<String, String>) ds.getValue();
+//                            //Toast.makeText(getApplicationContext(),readChildKey,Toast.LENGTH_SHORT).show();
+//                        }
 
                     }
 
@@ -89,7 +104,7 @@ public class Add extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                });*/
                 finish();
             }
         });

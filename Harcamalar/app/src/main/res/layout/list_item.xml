@@ -21,11 +21,12 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
                 <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_baseline_person_24"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/profile_mor"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="5dp"/>
                 <TextView
@@ -34,18 +35,23 @@
                     android:layout_height="wrap_content"
                     android:text="Email"
                     android:textSize="10dp"
-                    android:textColor="@color/black"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:textStyle="bold"/>
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/mor"/>
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_baseline_access_time_24"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"/>
                 <TextView
                     android:id="@+id/TVtarih"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tarih"
                     android:textSize="10dp"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/gri"/>
 
             </LinearLayout>
 
@@ -55,23 +61,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Detay"
-                android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="16dp"/>
+                android:textSize="16dp"
+                android:layout_marginRight="5dp"/>
 
 
         </LinearLayout>
 
         <TextView
-            android:layout_weight="1"
             android:id="@+id/txtTutar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="₺Tutar"
             android:gravity="right"
-            android:textSize="16dp"
+            android:textSize="18dp"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/pembe"
             android:textStyle="bold"/>
 
 

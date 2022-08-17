@@ -12,6 +12,7 @@ import java.util.List;
 public class CustomAdapter extends ArrayAdapter<Harcamalar> {
     private Activity context;
     private List<Harcamalar> harcamalar;
+    String emailAd;
 
     public CustomAdapter(Activity context, List<Harcamalar> harcamalar){
         super(context, R.layout.list_item, harcamalar);
@@ -28,12 +29,27 @@ public class CustomAdapter extends ArrayAdapter<Harcamalar> {
         TextView tvAciklama = listViewItem.findViewById(R.id.TVdetay);
         TextView tvTutar = listViewItem.findViewById(R.id.txtTutar);
 
+
+
         Harcamalar harcama = harcamalar.get(position);
 
-        tvEmail.setText(harcama.getEmail());
+        //Email ön ad
+        String email = harcama.getEmail();
+        String[] For_split_email = email.split("[@]");
+        for (int j = 0; j <= For_split_email.length - 1; j++)
+        {
+            //System.out.println("splited emails----------" + For_split_email[j]);
+            email = For_split_email[j];
+        }
+        email = For_split_email[0];
+
+        //TL simge eki
+        String tlSimge = harcama.getTutar()+" ₺";
+
+        tvEmail.setText(email);
         tvTarih.setText(harcama.getTarih());
         tvAciklama.setText(harcama.getAciklama());
-        tvTutar.setText(harcama.getTutar());
+        tvTutar.setText(tlSimge);
 
         return listViewItem;
     }
