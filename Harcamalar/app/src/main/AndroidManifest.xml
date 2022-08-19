@@ -14,7 +14,10 @@
         android:theme="@style/Theme.Harcamalar"
         tools:targetApi="31">
         <activity
-            android:name=".Listelerim"
+            android:name=".ListeAdd"
+            android:exported="false" />
+        <activity
+            android:name=".ListelerActivity"
             android:exported="false" />
         <activity
             android:name=".Update"

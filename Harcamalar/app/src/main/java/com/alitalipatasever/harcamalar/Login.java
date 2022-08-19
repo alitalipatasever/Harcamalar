@@ -76,7 +76,7 @@ public class Login extends AppCompatActivity {
                     email = For_split_email[0];
 
                     Toast.makeText(getApplicationContext(),"Hoşgeldin, "+email,Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    Intent intent = new Intent(Login.this, ListelerActivity.class);
                     startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();

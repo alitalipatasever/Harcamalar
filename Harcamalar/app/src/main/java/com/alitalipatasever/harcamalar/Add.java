@@ -3,6 +3,7 @@ package com.alitalipatasever.harcamalar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +32,7 @@ public class Add extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    String aciklama,tutar, tarih, email;
+    String aciklama,tutar, tarih, email, gelenListeId;
 
     ArrayList harcamaListesi = new ArrayList();
 
@@ -45,6 +46,9 @@ public class Add extends AppCompatActivity {
         btnEkle = (Button) findViewById(R.id.add);
         btnSil = (Button) findViewById(R.id.delete);
 
+        Intent intent = getIntent();
+        gelenListeId = intent.getStringExtra("id");
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         email = firebaseAuth.getCurrentUser().getEmail();
@@ -57,7 +61,7 @@ public class Add extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Harcamalar");
 
-        String key = database.getReference("Harcamalar").push().getKey();
+        String key = database.getReference("Harcamalar").child(gelenListeId).push().getKey();
 
 
         btnEkle.setOnClickListener(new View.OnClickListener() {
@@ -80,31 +84,8 @@ public class Add extends AppCompatActivity {
                 harcamalar.setTarih(tarih);
                 harcamalar.setId(key);
 
-                myRef.child(key).setValue(harcamalar);
+                myRef.child(gelenListeId).child(key).setValue(harcamalar);
 
-                /*myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        myRef.child(key).child("aciklama").setValue(aciklama);
-                        myRef.child(key).child("tutar").setValue(tutar);
-                        myRef.child(key).child("email").setValue(email);
-                        myRef.child(key).child("tarih").setValue(tarih);
-                        myRef.child(key).child("id").setValue(key);
-
-//                        for (DataSnapshot ds : dataSnapshot.getChildren()){
-//                            String readChildKey = ds.getKey();
-//                            HashMap<String, String> readChild = (HashMap<String, String>) ds.getValue();
-//                            //Toast.makeText(getApplicationContext(),readChildKey,Toast.LENGTH_SHORT).show();
-//                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
                 finish();
             }
         });

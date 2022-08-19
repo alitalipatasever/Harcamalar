@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/cerceve"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_weight="8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/profile_mor"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"/>
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textSize="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/mor"/>
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_baseline_access_time_24"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"/>
+                <TextView
+                    android:id="@+id/TVtarih"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tarih"
+                    android:textSize="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/gri"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvListeAdi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Liste Adı"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:layout_marginRight="5dp"/>
+            <TextView
+                android:id="@+id/tvListeId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Liste ID"
+                android:layout_marginRight="5dp"/>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/txtTutar"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_gravity="center_vertical"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

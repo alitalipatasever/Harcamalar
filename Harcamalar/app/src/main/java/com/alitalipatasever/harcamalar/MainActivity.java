@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    String email;
+    String email, gelenListeId;
     FirebaseDatabase database;
     DatabaseReference myRef;
 
@@ -55,9 +55,15 @@ public class MainActivity extends AppCompatActivity {
         txtToplam = (TextView) findViewById(R.id.txtToplam);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
 
+        harcamaList = new ArrayList<>();
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         email = firebaseAuth.getCurrentUser().getEmail();
+
+        Intent intent = getIntent();
+        gelenListeId = intent.getStringExtra("id");
+
 
         //Email ön ad
         String[] For_split_email = email.split("[@]");
@@ -70,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         txtEmail.setText(email);
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Harcamalar").child("");
+        myRef = database.getReference("Harcamalar").child(gelenListeId).child("");
 
 
 
@@ -86,11 +92,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Add.class);
+                intent.putExtra("id",gelenListeId);
                 startActivity(intent);
             }
         });
 
-        harcamaList = new ArrayList<>();
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -127,12 +134,12 @@ public class MainActivity extends AppCompatActivity {
 
                 float toplamTutar = 0;
 
-                for (int i = 0; i < harcamaList.size(); i++) {
-                    //if (harcamaList.get(i).getTutar() != null) {
-                        toplamTutar += Float.parseFloat(harcamaList.get(i).getTutar().replace(",","."));
-                    //}
-                }
-                txtToplam.setText(String.valueOf(toplamTutar).replace(".0","")+" ₺");
+//                for (int i = 0; i < harcamaList.size(); i++) {
+//                    //if (harcamaList.get(i).getTutar() != null) {
+//                        toplamTutar += Float.parseFloat(harcamaList.get(i).getTutar().replace(",","."));
+//                    //}
+//                }
+                //txtToplam.setText(String.valueOf(toplamTutar).replace(".0","")+" ₺");
                 //Toast.makeText(MainActivity.this, "Toplam Tutar: " + String.valueOf(toplamTutar).replace(".0",""), Toast.LENGTH_SHORT).show();
 
                 CustomAdapter adapter = new CustomAdapter(MainActivity.this, harcamaList);
