@@ -1,55 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Update">
+    android:orientation="vertical"
+    android:background="@color/bg">
 
-    <EditText
-        android:id="@+id/aciklama"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="açıklama"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:id="@+id/L1">
 
-    <EditText
-        android:id="@+id/tutar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="tutar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aciklama" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tl"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Harcamayı Düzenle"
+            android:textStyle="bold"
+            android:textSize="24dp"
+            android:layout_gravity="center"
+            android:layout_margin="25dp"/>
+        <EditText
+            android:id="@+id/aciklama"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/cerceve"
+            android:hint="Açıklama"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_baseline_textsms_24"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:drawablePadding="15dp"
+            android:inputType="text"/>
+        <EditText
+            android:id="@+id/tutar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/cerceve"
+            android:hint="Tutar"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/tl_icon_small"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:drawablePadding="15dp"
+            android:inputType="numberDecimal"/>
 
-    <Button
-        android:id="@+id/update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="28dp"
-        android:backgroundTint="#B3B1B2"
-        android:text="update"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tutar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Sil"
+                android:textColor="@color/pembe"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"/>
+            <Button
+                android:id="@+id/update"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Güncelle"
+                android:textColor="@color/white"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/yesil"/>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:backgroundTint="#F10555"
-        android:text="delete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintStart_toEndOf="@+id/update"
-        app:layout_constraintTop_toBottomOf="@+id/tutar" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <!--<ImageView-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:scaleType="centerInside"-->
+    <!--    android:layout_alignParentBottom="true"-->
+    <!--    android:layout_centerHorizontal="true"-->
+    <!--    android:src="@drawable/giris_bg" />-->
+
+
+</RelativeLayout>

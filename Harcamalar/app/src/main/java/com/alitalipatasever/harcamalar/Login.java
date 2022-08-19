@@ -41,8 +41,8 @@ public class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = ETusername.getText().toString();
-                password = ETpassword.getText().toString();
+                username = ETusername.getText().toString().trim();
+                password = ETpassword.getText().toString().trim();
                 if(username.isEmpty()){
                     Toast.makeText(getApplicationContext(),"Kullanıcı adı şifre alanları boş bırakılamaz!",Toast.LENGTH_SHORT).show();
                 }else{

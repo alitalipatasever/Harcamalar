@@ -1,43 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Register">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:background="@color/bg">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/L1">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile_mor_yeni"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kayıt Ol"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:layout_gravity="center"
+        android:layout_margin="25dp"/>
     <EditText
         android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="158dp"
-        tools:ignore="MissingConstraints" />
-
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/cerceve"
+        android:hint="E-mail"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="5dp"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:drawablePadding="15dp"
+        android:inputType="text"/>
     <EditText
         android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/cerceve"
+        android:hint="Şifre"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="5dp"
+        android:drawableLeft="@drawable/ic_baseline_password_24"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:drawablePadding="15dp"
+        android:inputType="textPassword"/>
 
-    <Button
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="REGISTER"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="horizontal"
+        android:layout_margin="15dp">
+        <Button
+            android:id="@+id/back"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Vazgeç"
+            android:textColor="@color/lacivert"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"/>
+        <Button
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Kaydet"
+            android:textColor="@color/white"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/yesil"/>
+    </LinearLayout>
+
+</LinearLayout>
+
+<!--<ImageView-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:scaleType="centerInside"-->
+<!--    android:layout_alignParentBottom="true"-->
+<!--    android:layout_centerHorizontal="true"-->
+<!--    android:src="@drawable/giris_bg" />-->
+
+
+</RelativeLayout>

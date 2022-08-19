@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Register extends AppCompatActivity {
 
     EditText ETusername, ETpassword;
-    Button register;
+    Button register,vazgec;
     FirebaseAuth firebaseAuth;
     private String username,password;
 
@@ -30,6 +30,7 @@ public class Register extends AppCompatActivity {
         ETusername = (EditText) findViewById(R.id.username);
         ETpassword = (EditText) findViewById(R.id.password);
         register = (Button) findViewById(R.id.register);
+        vazgec = (Button) findViewById(R.id.back);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -46,6 +47,12 @@ public class Register extends AppCompatActivity {
                     registerFunc();
                 }
 
+            }
+        });
+        vazgec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
