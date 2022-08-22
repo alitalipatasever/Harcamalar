@@ -57,8 +57,7 @@ public class Update extends AppCompatActivity {
         String gelenAciklama = intent.getStringExtra("aciklama");
         String gelenTutar = intent.getStringExtra("tutar");
         String gelenId = intent.getStringExtra("id");
-
-
+        String gelenListeId = intent.getStringExtra("listeId");
 
         ETaciklama.setText(gelenAciklama);
         ETtutar.setText(gelenTutar);
@@ -70,7 +69,7 @@ public class Update extends AppCompatActivity {
                 String aciklama = ETaciklama.getText().toString();
                 String tutar = ETtutar.getText().toString();
 
-                myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenId);
+                myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeId).child(gelenId);
 
                 Harcamalar harcama = new Harcamalar(email,tarih,aciklama,tutar,gelenId);
                 myRef.setValue(harcama).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("aciklama",harcama.getAciklama());
                 intent.putExtra("tutar",harcama.getTutar());
                 intent.putExtra("id",harcama.getId());
+                intent.putExtra("listeId",gelenListeId);
                 startActivity(intent);
 
             }
@@ -128,18 +129,22 @@ public class MainActivity extends AppCompatActivity {
                 harcamaList.clear();
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Harcamalar harcama = dataSnapshot.getValue(Harcamalar.class);
-                    harcamaList.add(harcama);
+                    try {
+                        Harcamalar harcama = dataSnapshot.getValue(Harcamalar.class);
+                        harcamaList.add(harcama);
+                    } catch (Exception e) {
+                     e.printStackTrace();
+                    }
                 }
 
                 float toplamTutar = 0;
 
-//                for (int i = 0; i < harcamaList.size(); i++) {
-//                    //if (harcamaList.get(i).getTutar() != null) {
-//                        toplamTutar += Float.parseFloat(harcamaList.get(i).getTutar().replace(",","."));
-//                    //}
-//                }
-                //txtToplam.setText(String.valueOf(toplamTutar).replace(".0","")+" ₺");
+                for (int i = 0; i < harcamaList.size(); i++) {
+                    //if (harcamaList.get(i).getTutar() != null) {
+                        toplamTutar += Float.parseFloat(harcamaList.get(i).getTutar().replace(",","."));
+                    //}
+                }
+                txtToplam.setText(String.valueOf(toplamTutar).replace(".0","")+" ₺");
                 //Toast.makeText(MainActivity.this, "Toplam Tutar: " + String.valueOf(toplamTutar).replace(".0",""), Toast.LENGTH_SHORT).show();
 
                 CustomAdapter adapter = new CustomAdapter(MainActivity.this, harcamaList);

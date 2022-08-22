@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -24,6 +25,7 @@ import java.util.List;
 public class ListelerActivity extends AppCompatActivity {
 
     String email;
+    Button btnListeKayit, btnYeniListe;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -39,6 +41,7 @@ public class ListelerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listeler);
 
         listView = (ListView) findViewById(R.id.listview);
+        btnYeniListe = (Button) findViewById(R.id.yeniListe);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -59,6 +62,13 @@ public class ListelerActivity extends AppCompatActivity {
                 intent.putExtra("id",listeler1.getId());
                 startActivity(intent);
 
+            }
+        });
+        btnYeniListe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListelerActivity.this,ListeAdd.class);
+                startActivity(intent);
             }
         });
 
