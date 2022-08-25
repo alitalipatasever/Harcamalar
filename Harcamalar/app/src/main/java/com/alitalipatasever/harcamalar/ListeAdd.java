@@ -42,6 +42,9 @@ public class ListeAdd extends AppCompatActivity {
         firebaseUser = firebaseAuth.getCurrentUser();
         email = firebaseAuth.getCurrentUser().getEmail();
 
+        String replaceEmail1 = email.replace("@","_");
+        String replaceEmail = replaceEmail1.replace(".","_");
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         tarih = simpleDateFormat.format(new Date());
 
@@ -62,10 +65,12 @@ public class ListeAdd extends AppCompatActivity {
                 liste.setlisteAdi(listeAdi);
                 liste.setTarih(tarih);
 
-                myRef.child(key).setValue(liste);
+                //myRef.child(replaceEmail).setValue(liste);
+                myRef.child(replaceEmail).push().setValue(liste);
 
                 Intent intent = new Intent(ListeAdd.this,ListelerActivity.class);
                 startActivity(intent);
+                finish();
 
             }
         });

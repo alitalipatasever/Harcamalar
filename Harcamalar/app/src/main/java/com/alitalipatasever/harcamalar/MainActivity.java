@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         firebaseUser = firebaseAuth.getCurrentUser();
         email = firebaseAuth.getCurrentUser().getEmail();
 
+        String replaceEmail1 = email.replace("@","_");
+        String replaceEmail = replaceEmail1.replace(".","_");
+
         Intent intent = getIntent();
         gelenListeId = intent.getStringExtra("id");
 
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         txtEmail.setText(email);
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Harcamalar").child(gelenListeId).child("");
+        myRef = database.getReference("Harcamalar").child(replaceEmail).child("");
 
 
 

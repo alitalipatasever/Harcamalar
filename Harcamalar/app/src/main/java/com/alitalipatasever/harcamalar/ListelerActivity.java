@@ -32,8 +32,8 @@ public class ListelerActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
-    ListView listView;
-    List<Listeler> listeList;
+    public static ListView listView;
+    public static List<Listeler> listeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class ListelerActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listview);
         btnYeniListe = (Button) findViewById(R.id.yeniListe);
+        btnListeKayit = (Button) findViewById(R.id.listeKayit);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -71,21 +72,35 @@ public class ListelerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnListeKayit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListelerActivity.this,RegisterList.class);
+                startActivity(intent);
+            }
+        });
 
     }
     @Override
     protected void onResume() {
         super.onResume();
 
+        listeList.clear();
+
+        CustomAdapterListeler adapter = new CustomAdapterListeler(ListelerActivity.this, listeList);
+        listView.setAdapter(adapter);
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                listeList.clear();
-
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Listeler listeler1 = dataSnapshot.getValue(Listeler.class);
-                    listeList.add(listeler1);
+                    try {
+                        Listeler listeler1 = dataSnapshot.getValue(Listeler.class);
+                        listeList.add(listeler1);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 CustomAdapterListeler adapter = new CustomAdapterListeler(ListelerActivity.this, listeList);
@@ -98,5 +113,15 @@ public class ListelerActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        listeList.clear();
+
+        CustomAdapterListeler adapter = new CustomAdapterListeler(ListelerActivity.this, listeList);
+        listView.setAdapter(adapter);
     }
 }

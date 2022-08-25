@@ -53,6 +53,9 @@ public class Add extends AppCompatActivity {
         firebaseUser = firebaseAuth.getCurrentUser();
         email = firebaseAuth.getCurrentUser().getEmail();
 
+        String replaceEmail1 = email.replace("@","_");
+        String replaceEmail = replaceEmail1.replace(".","_");
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         tarih = simpleDateFormat.format(new Date());
 
@@ -61,7 +64,7 @@ public class Add extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Harcamalar");
 
-        String key = database.getReference("Harcamalar").child(gelenListeId).push().getKey();
+        String key = database.getReference("Harcamalar").child(replaceEmail).push().getKey();
 
 
         btnEkle.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +87,7 @@ public class Add extends AppCompatActivity {
                 harcamalar.setTarih(tarih);
                 harcamalar.setId(key);
 
-                myRef.child(gelenListeId).child(key).setValue(harcamalar);
+                myRef.child(replaceEmail).child(key).setValue(harcamalar);
 
                 finish();
             }
