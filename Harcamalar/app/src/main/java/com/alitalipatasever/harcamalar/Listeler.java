@@ -1,11 +1,15 @@
 package com.alitalipatasever.harcamalar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Listeler {
 
     public String email;
     public String tarih;
     public String listeAdi;
     public String id;
+    private ArrayList<User> users = null;
 
     public Listeler() {
     }
@@ -47,5 +51,13 @@ public class Listeler {
     
     public String getId() {
         return id;
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
     }
 }

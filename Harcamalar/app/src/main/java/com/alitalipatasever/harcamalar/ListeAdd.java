@@ -65,8 +65,11 @@ public class ListeAdd extends AppCompatActivity {
                 liste.setlisteAdi(listeAdi);
                 liste.setTarih(tarih);
 
+                ArrayList dizi = new ArrayList<>();
+                dizi.add(listeAdi);
+
                 //myRef.child(replaceEmail).setValue(liste);
-                myRef.child(replaceEmail).push().setValue(liste);
+                myRef.child(replaceEmail).child(listeAdi).setValue(liste);
 
                 Intent intent = new Intent(ListeAdd.this,ListelerActivity.class);
                 startActivity(intent);

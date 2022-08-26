@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    String email, gelenListeId;
+    String email, gelenListeAdi;
+    ArrayList<String> gelenUsers;
     FirebaseDatabase database;
     DatabaseReference myRef;
 
@@ -65,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
         String replaceEmail = replaceEmail1.replace(".","_");
 
         Intent intent = getIntent();
-        gelenListeId = intent.getStringExtra("id");
+        gelenListeAdi = intent.getStringExtra("listeAdi");
+        gelenUsers = intent.getParcelableExtra("users");
 
 
         //Email ön ad
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         txtEmail.setText(email);
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Harcamalar").child(replaceEmail).child("");
+        myRef = database.getReference("Harcamalar").child(replaceEmail).child(gelenListeAdi);
 
 
 
@@ -95,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Add.class);
-                intent.putExtra("id",gelenListeId);
+                intent.putExtra("listeAdi",gelenListeAdi);
+                intent.putExtra("users",gelenUsers);
                 startActivity(intent);
             }
         });
@@ -112,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("aciklama",harcama.getAciklama());
                 intent.putExtra("tutar",harcama.getTutar());
                 intent.putExtra("id",harcama.getId());
-                intent.putExtra("listeId",gelenListeId);
+                //intent.putExtra("listeId",gelenListeId);
                 startActivity(intent);
 
             }
@@ -144,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
                 for (int i = 0; i < harcamaList.size(); i++) {
                     //if (harcamaList.get(i).getTutar() != null) {
-                        toplamTutar += Float.parseFloat(harcamaList.get(i).getTutar().replace(",","."));
+                        //toplamTutar += Float.parseFloat(harcamaList.get(i).getTutar().replace(",","."));
                     //}
                 }
                 txtToplam.setText(String.valueOf(toplamTutar).replace(".0","")+" ₺");

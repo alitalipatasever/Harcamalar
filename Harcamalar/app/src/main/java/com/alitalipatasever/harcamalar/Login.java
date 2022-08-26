@@ -77,16 +77,6 @@ public class Login extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(),"Hoşgeldin, "+email,Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Login.this, ListelerActivity.class);
-
-                    try {
-                        ListelerActivity.listeList.clear();
-
-                        CustomAdapterListeler adapter = new CustomAdapterListeler(Login.this, ListelerActivity.listeList);
-                        ListelerActivity.listView.setAdapter(adapter);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
                     startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();

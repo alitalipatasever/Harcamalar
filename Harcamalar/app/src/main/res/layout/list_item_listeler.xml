@@ -17,6 +17,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvListeId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Liste ID"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/bg"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -64,12 +71,7 @@
                 android:textStyle="bold"
                 android:textSize="16dp"
                 android:layout_marginRight="5dp"/>
-            <TextView
-                android:id="@+id/tvListeId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Liste ID"
-                android:layout_marginRight="5dp"/>
+
 
 
         </LinearLayout>

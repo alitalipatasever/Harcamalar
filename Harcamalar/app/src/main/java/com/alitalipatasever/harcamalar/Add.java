@@ -32,7 +32,8 @@ public class Add extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    String aciklama,tutar, tarih, email, gelenListeId;
+    String aciklama,tutar, tarih, email, gelenListeAdi;
+    ArrayList<String> gelenUsers;
 
     ArrayList harcamaListesi = new ArrayList();
 
@@ -47,7 +48,8 @@ public class Add extends AppCompatActivity {
         btnSil = (Button) findViewById(R.id.delete);
 
         Intent intent = getIntent();
-        gelenListeId = intent.getStringExtra("id");
+        gelenListeAdi = intent.getStringExtra("listeAdi");
+        gelenUsers = intent.getParcelableExtra("users");
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -87,7 +89,7 @@ public class Add extends AppCompatActivity {
                 harcamalar.setTarih(tarih);
                 harcamalar.setId(key);
 
-                myRef.child(replaceEmail).child(key).setValue(harcamalar);
+                myRef.child(replaceEmail).child(gelenListeAdi).push().setValue(harcamalar);
 
                 finish();
             }

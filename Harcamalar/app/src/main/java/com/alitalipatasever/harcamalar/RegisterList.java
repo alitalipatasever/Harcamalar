@@ -13,8 +13,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegisterList extends AppCompatActivity {
-    EditText etListeId;
+    EditText etEmail,etListeAdi;
     Button btnKaydet;
 
     FirebaseDatabase database;
@@ -22,14 +25,17 @@ public class RegisterList extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
-    String email,listeId;
+    String email,registerEmail,registerListeAdi;
+
+    ArrayList<User> gelenUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_list);
 
-        etListeId = (EditText) findViewById(R.id.listeId);
+        etEmail = (EditText) findViewById(R.id.email);
+        etListeAdi = (EditText) findViewById(R.id.listeAdi);
         btnKaydet = (Button) findViewById(R.id.add);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -39,18 +45,37 @@ public class RegisterList extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Harcamalar");
 
+        Intent intent = getIntent();
+        gelenUsers = intent.getParcelableArrayListExtra("users");
 
         btnKaydet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listeId = etListeId.getText().toString().trim();
+                registerEmail = etEmail.getText().toString().trim();
+                registerListeAdi = etListeAdi.getText().toString().trim();
 
-                myRef.child(listeId).child("email").setValue(email);
+                String replaceEmail1 = registerEmail.replace("@","_");
+                String replaceEmail = replaceEmail1.replace(".","_");
+
+                List<User> arrayList = new ArrayList<>();
+                if (gelenUsers != null) {
+                    arrayList = gelenUsers;
+                }
+                User user = new User();
+                user.setUserEmail(email);
+                arrayList.add(user);
+                myRef.child(replaceEmail).child(registerListeAdi).child("users").setValue(arrayList);
                 Intent intent = new Intent(RegisterList.this,ListelerActivity.class);
                 startActivity(intent);
             }
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
