@@ -44,25 +44,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="15dp">
+            android:layout_margin="5dp">
             <Button
                 android:id="@+id/back"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:text="Vazgeç"
                 android:textColor="@color/lacivert"
-                android:layout_margin="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/white"/>
+                android:background="@drawable/buton_beyaz_cerceve"
+                android:textAllCaps="false"/>
             <Button
                 android:id="@+id/add"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:text="Kaydet"
+                android:textSize="16dp"
                 android:textColor="@color/white"
-                android:layout_margin="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/yesil"/>
+                android:background="@drawable/buton_yesil"
+                android:textAllCaps="false"/>
         </LinearLayout>
 
     </LinearLayout>

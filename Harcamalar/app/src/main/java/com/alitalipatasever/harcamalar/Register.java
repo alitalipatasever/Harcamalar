@@ -30,7 +30,7 @@ public class Register extends AppCompatActivity {
         ETusername = (EditText) findViewById(R.id.username);
         ETpassword = (EditText) findViewById(R.id.password);
         register = (Button) findViewById(R.id.register);
-        vazgec = (Button) findViewById(R.id.back);
+        vazgec = (Button) findViewById(R.id.vazgec);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
