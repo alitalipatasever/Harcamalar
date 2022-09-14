@@ -27,7 +27,6 @@ public class CustomAdapterListeler extends ArrayAdapter<Listeler> {
         TextView tvEmail = listViewItem.findViewById(R.id.tvEmail);
         TextView tvTarih = listViewItem.findViewById(R.id.TVtarih);
         TextView tvListeAdi = listViewItem.findViewById(R.id.tvListeAdi);
-        TextView tvListeId = listViewItem.findViewById(R.id.tvListeId);
 
 
 
@@ -36,7 +35,6 @@ public class CustomAdapterListeler extends ArrayAdapter<Listeler> {
         tvEmail.setText(listeler1.getEmail());
         tvTarih.setText(listeler1.getTarih());
         tvListeAdi.setText(listeler1.getlisteAdi());
-        tvListeId.setText(listeler1.getId());
 
         return listViewItem;
     }

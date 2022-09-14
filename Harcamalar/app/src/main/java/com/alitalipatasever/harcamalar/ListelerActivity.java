@@ -2,6 +2,8 @@ package com.alitalipatasever.harcamalar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +11,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,15 +30,18 @@ import java.util.List;
 
 public class ListelerActivity extends AppCompatActivity {
 
-    String email;
+    ImageButton btnProfile;
+    String email,gelenListeAdi, str, replaceEmail;
     Button btnListeKayit, btnYeniListe;
+    TextView txtEmail;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
-    ListView listView;
+    //GridView listView;
+    RecyclerView listView;
     List<Listeler> listeList;
 
     ArrayList<User> gelenUsers;
@@ -42,23 +51,41 @@ public class ListelerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listeler);
 
-        listView = (ListView) findViewById(R.id.listview);
+        txtEmail = (TextView) findViewById(R.id.txtEmail);
+        btnProfile = (ImageButton) findViewById(R.id.profile);
+        //listView = (GridView) findViewById(R.id.listview);
+        listView = (RecyclerView) findViewById(R.id.listview);
+        listView.setLayoutManager(new GridLayoutManager(this, 2));
         btnYeniListe = (Button) findViewById(R.id.yeniListe);
-        btnListeKayit = (Button) findViewById(R.id.listeKayit);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         email = firebaseAuth.getCurrentUser().getEmail();
 
         String replaceEmail1 = email.replace("@","_");
-        String replaceEmail = replaceEmail1.replace(".","_");
+        replaceEmail = replaceEmail1.replace(".","_");
+
+
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Harcamalar").child(replaceEmail);
+        myRef = database.getReference("Harcamalar").child("").child(replaceEmail);
+
+        str = myRef.toString();
+
+
 
         listeList = new ArrayList<>();
+        //Email ön ad
+        String[] For_split_email = email.split("[@]");
+        for (int j = 0; j <= For_split_email.length - 1; j++)
+        {
+            //System.out.println("splited emails----------" + For_split_email[j]);
+            email = For_split_email[j];
+        }
+        email = For_split_email[0];
+        txtEmail.setText(email);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -73,7 +100,8 @@ public class ListelerActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        });
+        });*/
+
         btnYeniListe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,11 +109,10 @@ public class ListelerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btnListeKayit.setOnClickListener(new View.OnClickListener() {
+        btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListelerActivity.this,RegisterList.class);
-                intent.putParcelableArrayListExtra("users", gelenUsers);
+                Intent intent = new Intent(ListelerActivity.this,Profile.class);
                 startActivity(intent);
             }
         });
@@ -98,20 +125,39 @@ public class ListelerActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (str.equals(replaceEmail)){
 
-                listeList.clear();
+                    listeList.clear();
 
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    try {
-                        Listeler listeler1 = dataSnapshot.getValue(Listeler.class);
-                        listeList.add(listeler1);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        try {
+                            Listeler listeler1 = dataSnapshot.getValue(Listeler.class);
+                            listeList.add(listeler1);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
 
-                CustomAdapterListeler adapter = new CustomAdapterListeler(ListelerActivity.this, listeList);
-                listView.setAdapter(adapter);
+                    //CustomAdapterListeler adapter = new CustomAdapterListeler(ListelerActivity.this, listeList);
+                    //listView.setAdapter(adapter);
+                    CustomRecyclerAdapter customRecyclerAdapter = new CustomRecyclerAdapter(ListelerActivity.this, listeList, new CustomRecyclerAdapter.ItemClickListener() {
+                        @Override
+                        public void onItemClick(Listeler listeler) {
+                            Listeler liste = listeler;
+                            gelenListeAdi = liste.getlisteAdi();
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            intent.putExtra("listeAdi",gelenListeAdi);
+                            intent.putParcelableArrayListExtra("users", liste.getUsers());
+
+                            gelenUsers = liste.getUsers();
+
+                            startActivity(intent);
+                        }
+                    });
+                    listView.setAdapter(customRecyclerAdapter);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Emaile ait liste bulunamadı!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

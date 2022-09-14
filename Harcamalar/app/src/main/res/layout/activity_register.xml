@@ -71,10 +71,10 @@ android:background="@color/bg">
             android:background="@drawable/buton_beyaz_cerceve"
             android:textAllCaps="false"/>
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/register"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Giriş"
+            android:text="Kaydet"
             android:textSize="16dp"
             android:textColor="@color/white"
             android:layout_marginRight="20dp"

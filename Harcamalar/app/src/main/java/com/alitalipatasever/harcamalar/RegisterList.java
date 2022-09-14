@@ -25,7 +25,7 @@ public class RegisterList extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
-    String email,registerEmail,registerListeAdi;
+    String email,registerEmail,registerListeAdi,gelenListeAdi;
 
     ArrayList<User> gelenUsers;
 
@@ -46,13 +46,14 @@ public class RegisterList extends AppCompatActivity {
         myRef = database.getReference("Harcamalar");
 
         Intent intent = getIntent();
+
+        gelenListeAdi = intent.getStringExtra("listeAdi");
         gelenUsers = intent.getParcelableArrayListExtra("users");
 
         btnKaydet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 registerEmail = etEmail.getText().toString().trim();
-                registerListeAdi = etListeAdi.getText().toString().trim();
 
                 String replaceEmail1 = registerEmail.replace("@","_");
                 String replaceEmail = replaceEmail1.replace(".","_");
@@ -64,7 +65,7 @@ public class RegisterList extends AppCompatActivity {
                 User user = new User();
                 user.setUserEmail(email);
                 arrayList.add(user);
-                myRef.child(replaceEmail).child(registerListeAdi).child("users").setValue(arrayList);
+                myRef.child(gelenListeAdi).child(replaceEmail).setValue(replaceEmail);
                 Intent intent = new Intent(RegisterList.this,ListelerActivity.class);
                 startActivity(intent);
             }

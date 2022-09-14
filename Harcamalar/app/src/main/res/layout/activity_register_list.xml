@@ -14,13 +14,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/tl"
+            android:src="@drawable/profile_mor_yeni"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Listeye Kayıt Ol"
+            android:text="Listeye Kişi Ekle"
             android:textStyle="bold"
             android:textSize="24dp"
             android:layout_gravity="center"
@@ -39,44 +39,36 @@
             android:paddingRight="15dp"
             android:drawablePadding="15dp"
             android:inputType="text"/>
-        <EditText
-            android:id="@+id/listeAdi"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/cerceve"
-            android:hint="Liste Adı"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_baseline_textsms_24"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:drawablePadding="15dp"
-            android:inputType="text"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="15dp">
+            android:layout_margin="5dp">
             <Button
                 android:id="@+id/back"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:text="Vazgeç"
                 android:textColor="@color/lacivert"
-                android:layout_margin="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/white"/>
+                android:background="@drawable/buton_beyaz_cerceve"
+                android:textAllCaps="false"/>
             <Button
                 android:id="@+id/add"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:text="Kaydet"
+                android:textSize="16dp"
                 android:textColor="@color/white"
-                android:layout_margin="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/yesil"/>
+                android:background="@drawable/buton_yesil"
+                android:textAllCaps="false"/>
         </LinearLayout>
 
     </LinearLayout>

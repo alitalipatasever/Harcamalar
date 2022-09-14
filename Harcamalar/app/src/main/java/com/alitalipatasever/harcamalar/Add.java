@@ -66,7 +66,7 @@ public class Add extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Harcamalar");
 
-        String key = database.getReference("Harcamalar").child(replaceEmail).push().getKey();
+        String key = database.getReference("Harcamalar").push().getKey();
 
 
         btnEkle.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +89,7 @@ public class Add extends AppCompatActivity {
                 harcamalar.setTarih(tarih);
                 harcamalar.setId(key);
 
-                myRef.child(replaceEmail).child(gelenListeAdi).push().setValue(harcamalar);
+                myRef.child(gelenListeAdi).push().setValue(harcamalar);
 
                 finish();
             }

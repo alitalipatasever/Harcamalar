@@ -29,9 +29,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageButton btnProfile;
     FloatingActionButton fabAdd;
-    TextView txtToplam, txtEmail;
+    TextView txtToplam, txtListeAdi;
+    Button btnRegisterList;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -50,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        btnProfile = (ImageButton) findViewById(R.id.profile);
         fabAdd = findViewById(R.id.fabAdd);
         listView = (ListView) findViewById(R.id.listview);
         txtToplam = (TextView) findViewById(R.id.txtToplam);
-        txtEmail = (TextView) findViewById(R.id.txtEmail);
+        txtListeAdi = (TextView) findViewById(R.id.listeAdi);
+        btnRegisterList = (Button) findViewById(R.id.kisiEkle);
 
         harcamaList = new ArrayList<>();
 
@@ -69,27 +69,16 @@ public class MainActivity extends AppCompatActivity {
         gelenListeAdi = intent.getStringExtra("listeAdi");
         gelenUsers = intent.getParcelableExtra("users");
 
-
-        //Email ön ad
-        String[] For_split_email = email.split("[@]");
-        for (int j = 0; j <= For_split_email.length - 1; j++)
-        {
-            //System.out.println("splited emails----------" + For_split_email[j]);
-            email = For_split_email[j];
-        }
-        email = For_split_email[0];
-        txtEmail.setText(email);
+        txtListeAdi.setText(gelenListeAdi);
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Harcamalar").child(replaceEmail).child(gelenListeAdi);
+        myRef = database.getReference("Harcamalar").child(gelenListeAdi);
 
-
-
-
-        btnProfile.setOnClickListener(new View.OnClickListener() {
+        btnRegisterList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,Profile.class);
+                Intent intent = new Intent(MainActivity.this,RegisterList.class);
+                intent.putExtra("listeAdi",gelenListeAdi);
                 startActivity(intent);
             }
         });
@@ -146,9 +135,9 @@ public class MainActivity extends AppCompatActivity {
                 float toplamTutar = 0;
 
                 for (int i = 0; i < harcamaList.size(); i++) {
-                    //if (harcamaList.get(i).getTutar() != null) {
-                        //toplamTutar += Float.parseFloat(harcamaList.get(i).getTutar().replace(",","."));
-                    //}
+                    if (harcamaList.get(i).getTutar() != null) {
+                        toplamTutar += Float.parseFloat(harcamaList.get(i).getTutar().replace(",","."));
+                    }
                 }
                 txtToplam.setText(String.valueOf(toplamTutar).replace(".0","")+" ₺");
                 //Toast.makeText(MainActivity.this, "Toplam Tutar: " + String.valueOf(toplamTutar).replace(".0",""), Toast.LENGTH_SHORT).show();
