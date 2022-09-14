@@ -72,6 +72,18 @@ public class ListelerActivity extends AppCompatActivity {
 
         str = myRef.toString();
 
+        //Email ön ad
+        String[] For_split_email1 = str.split("[/]");
+        for (int j = 0; j <= For_split_email1.length - 1; j++)
+        {
+            //System.out.println("splited emails----------" + For_split_email[j]);
+            email = For_split_email1[j];
+        }
+        str = For_split_email1[4];
+
+
+
+
 
 
         listeList = new ArrayList<>();
