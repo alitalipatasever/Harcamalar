@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("aciklama",harcama.getAciklama());
                 intent.putExtra("tutar",harcama.getTutar());
                 intent.putExtra("id",harcama.getId());
+                intent.putExtra("listeAdi",gelenListeAdi);
                 //intent.putExtra("listeId",gelenListeId);
                 startActivity(intent);
 

@@ -29,7 +29,7 @@ public class Update extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    String email, tarih;
+    String email, tarih, gelenListeAdi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class Update extends AppCompatActivity {
         String gelenTutar = intent.getStringExtra("tutar");
         String gelenId = intent.getStringExtra("id");
         String gelenListeId = intent.getStringExtra("listeId");
+        gelenListeAdi = intent.getStringExtra("listeAdi");
 
         ETaciklama.setText(gelenAciklama);
         ETtutar.setText(gelenTutar);
@@ -69,14 +70,12 @@ public class Update extends AppCompatActivity {
                 String aciklama = ETaciklama.getText().toString();
                 String tutar = ETtutar.getText().toString();
 
-                myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeId).child(gelenId);
+                myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi).child(gelenId);
 
                 Harcamalar harcama = new Harcamalar(email,tarih,aciklama,tutar,gelenId);
                 myRef.setValue(harcama).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(intent);
                         finish();
                     }
                 });
@@ -87,11 +86,8 @@ public class Update extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenId);
+                myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi).child(gelenId);
                 myRef.removeValue();
-
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
                 finish();
             }
         });

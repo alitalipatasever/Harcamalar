@@ -66,8 +66,7 @@ public class RegisterList extends AppCompatActivity {
                 user.setUserEmail(email);
                 arrayList.add(user);
                 myRef.child(gelenListeAdi).child(replaceEmail).setValue(replaceEmail);
-                Intent intent = new Intent(RegisterList.this,MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

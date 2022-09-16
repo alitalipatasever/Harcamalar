@@ -14,13 +14,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/tl"
+            android:src="@drawable/profile_mor_yeni"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Harcamayı Düzenle"
+            android:text="Harcamayı Güncelle"
             android:textStyle="bold"
             android:textSize="24dp"
             android:layout_gravity="center"
@@ -52,31 +52,39 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:drawablePadding="15dp"
-            android:inputType="numberDecimal"/>
+            android:inputType="number"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="15dp">
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/delete"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Sil"
-                android:textColor="@color/pembe"
-                android:layout_margin="20dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/white"/>
+                android:background="@drawable/buton_beyaz_cerceve"
+                android:text="Sil"
+                android:textAllCaps="false"
+                android:textColor="@color/pembe" />
+
             <Button
                 android:id="@+id/update"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Güncelle"
-                android:textColor="@color/white"
-                android:layout_margin="20dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/yesil"/>
+                android:background="@drawable/buton_yesil"
+                android:text="Güncelle"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
         </LinearLayout>
 
     </LinearLayout>
