@@ -89,7 +89,7 @@ public class Add extends AppCompatActivity {
                 harcamalar.setTarih(tarih);
                 harcamalar.setId(key);
 
-                myRef.child(gelenListeAdi).push().setValue(harcamalar);
+                myRef.child(gelenListeAdi).child(key).setValue(harcamalar);
 
                 finish();
             }

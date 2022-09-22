@@ -30,8 +30,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton fabAdd;
-    TextView txtToplam, txtListeAdi;
-    Button btnRegisterList;
+    TextView txtToplam, txtListeAdi, txtKisiToplamHarcama;
+    Button btnRegisterList,btnListeSil;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listView;
     List<Harcamalar> harcamaList;
+    String replaceEmail;
 
 
     @Override
@@ -53,8 +54,10 @@ public class MainActivity extends AppCompatActivity {
         fabAdd = findViewById(R.id.fabAdd);
         listView = (ListView) findViewById(R.id.listview);
         txtToplam = (TextView) findViewById(R.id.txtToplam);
+        txtKisiToplamHarcama = (TextView) findViewById(R.id.kisiToplamHarcama);
         txtListeAdi = (TextView) findViewById(R.id.listeAdi);
         btnRegisterList = (Button) findViewById(R.id.kisiEkle);
+        btnListeSil = (Button) findViewById(R.id.listeSil);
 
         harcamaList = new ArrayList<>();
 
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         email = firebaseAuth.getCurrentUser().getEmail();
 
         String replaceEmail1 = email.replace("@","_");
-        String replaceEmail = replaceEmail1.replace(".","_");
+        replaceEmail = replaceEmail1.replace(".","_");
 
         Intent intent = getIntent();
         gelenListeAdi = intent.getStringExtra("listeAdi");
@@ -91,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnListeSil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi);
+                myRef.removeValue();
+                finish();
+            }
+        });
 
 
 
@@ -103,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),Update.class);
                 intent.putExtra("aciklama",harcama.getAciklama());
                 intent.putExtra("tutar",harcama.getTutar());
-                intent.putExtra("id",harcama.getId());
+                intent.putExtra("harcamaId",harcama.getId());
                 intent.putExtra("listeAdi",gelenListeAdi);
                 //intent.putExtra("listeId",gelenListeId);
                 startActivity(intent);
@@ -133,15 +144,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                float toplamTutar = 0;
+                float toplamTutar = 0, kisiToplamHarcama = 0;
 
                 for (int i = 0; i < harcamaList.size(); i++) {
                     if (harcamaList.get(i).getTutar() != null) {
                         toplamTutar += Float.parseFloat(harcamaList.get(i).getTutar().replace(",","."));
                     }
+                    if(harcamaList.get(i).getEmail().equals(email)){
+                        kisiToplamHarcama += Float.parseFloat(harcamaList.get(i).getTutar().replace(",","."));
+                    }
                 }
                 txtToplam.setText(String.valueOf(toplamTutar).replace(".0","")+" ₺");
-                //Toast.makeText(MainActivity.this, "Toplam Tutar: " + String.valueOf(toplamTutar).replace(".0",""), Toast.LENGTH_SHORT).show();
+                txtKisiToplamHarcama.setText("Ben: "+String.valueOf(kisiToplamHarcama).replace(".0","")+" ₺");
 
                 CustomAdapter adapter = new CustomAdapter(MainActivity.this, harcamaList);
                 listView.setAdapter(adapter);

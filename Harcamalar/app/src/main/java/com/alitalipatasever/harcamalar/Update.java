@@ -29,7 +29,7 @@ public class Update extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    String email, tarih, gelenListeAdi;
+    String email, tarih, gelenListeAdi,gelenId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class Update extends AppCompatActivity {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         tarih = simpleDateFormat.format(new Date());
-        tarih = tarih + " güncellendi.";
+        tarih = tarih + " \n"+email+" güncelledi.";
 
         db = FirebaseDatabase.getInstance();
         //String readChildKey = db.getReference("Harcamalar").child("").getKey();
@@ -56,7 +56,7 @@ public class Update extends AppCompatActivity {
 
         String gelenAciklama = intent.getStringExtra("aciklama");
         String gelenTutar = intent.getStringExtra("tutar");
-        String gelenId = intent.getStringExtra("id");
+        gelenId = intent.getStringExtra("harcamaId");
         String gelenListeId = intent.getStringExtra("listeId");
         gelenListeAdi = intent.getStringExtra("listeAdi");
 

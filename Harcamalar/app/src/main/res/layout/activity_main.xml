@@ -10,7 +10,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:id="@+id/bannerLL"
             android:layout_margin="25dp"
             android:padding="15dp"
@@ -19,54 +19,111 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/listeAdi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Liste Adı"
-                    android:textStyle="bold"
-                    android:textSize="24dp"/>
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/kisiEkle"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@drawable/profile_mor_yeni"/>
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/listeAdi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Liste Adı"
+                        android:textStyle="bold"
+                        android:textSize="24dp"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kişi Ekle"
-                        android:layout_marginLeft="5dp"/>
+                        android:text="Toplam Harcama"/>
+                    <TextView
+                        android:id="@+id/txtToplam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="369 ₺"
+                        android:textStyle="bold"
+                        android:textColor="@color/pembe"
+                        android:textSize="30dp"/>
+
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:gravity="center">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Toplam Harcama"/>
-                <TextView
-                    android:id="@+id/txtToplam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="369 ₺"
-                    android:textStyle="bold"
-                    android:textColor="@color/pembe"
-                    android:textSize="30dp"/>
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:layout_gravity="center">
+                        <Button
+                            android:id="@+id/kisiEkle"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/profile_mor_yeni"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kişi Ekle"
+                            android:layout_marginLeft="5dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:gravity="center">
+                        <Button
+                            android:id="@+id/listeSil"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/ic_baseline_delete_24"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Listeyi Sil"
+                            android:layout_marginLeft="5dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:gravity="center">
+                        <TextView
+                            android:id="@+id/kisiToplamHarcama"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ben: 5 ₺"/>
+                    </LinearLayout>
 
+                </LinearLayout>
             </LinearLayout>
+
+
 
         </LinearLayout>
 
@@ -81,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@null"
-                android:layout_margin="5dp"/>
+                android:layout_margin="10dp"/>
 
         </LinearLayout>
     </RelativeLayout>

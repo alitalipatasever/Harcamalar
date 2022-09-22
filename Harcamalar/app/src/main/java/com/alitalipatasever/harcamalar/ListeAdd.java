@@ -71,8 +71,8 @@ public class ListeAdd extends AppCompatActivity {
                 //myRef.child(replaceEmail).setValue(liste);
                 myRef.child(listeAdi).setValue(liste);
 
-                Intent intent = new Intent(ListeAdd.this,ListelerActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ListeAdd.this,ListelerActivity.class);
+//                startActivity(intent);
                 finish();
 
             }
