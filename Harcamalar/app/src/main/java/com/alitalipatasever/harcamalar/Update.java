@@ -3,11 +3,14 @@ package com.alitalipatasever.harcamalar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,7 +32,8 @@ public class Update extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    String email, tarih, gelenListeAdi,gelenId;
+    String email, tarih, gelenListeAdi,gelenId,gelenEmail;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class Update extends AppCompatActivity {
         gelenId = intent.getStringExtra("harcamaId");
         String gelenListeId = intent.getStringExtra("listeId");
         gelenListeAdi = intent.getStringExtra("listeAdi");
+        gelenEmail = intent.getStringExtra("email");
 
         ETaciklama.setText(gelenAciklama);
         ETtutar.setText(gelenTutar);
@@ -72,7 +77,7 @@ public class Update extends AppCompatActivity {
 
                 myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi).child(gelenId);
 
-                Harcamalar harcama = new Harcamalar(email,tarih,aciklama,tutar,gelenId);
+                Harcamalar harcama = new Harcamalar(gelenEmail,tarih,aciklama,tutar,gelenId);
                 myRef.setValue(harcama).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -86,9 +91,29 @@ public class Update extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi).child(gelenId);
-                myRef.removeValue();
-                finish();
+
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.custom_dialog);
+                TextView textView = (TextView)findViewById(R.id.TVtitle);
+                textView.setText("Silmek istediğinize emin misiniz?");
+                Button btnEvet = (Button)dialog.findViewById(R.id.BtnEvet);
+                btnEvet.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi).child(gelenId);
+                        myRef.removeValue();
+                        finish();
+                    }
+                });
+                Button btnHayir = (Button)dialog.findViewById(R.id.BtnHayir);
+                btnHayir.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+
             }
         });
 

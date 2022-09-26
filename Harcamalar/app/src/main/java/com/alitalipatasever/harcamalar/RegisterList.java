@@ -18,7 +18,7 @@ import java.util.List;
 
 public class RegisterList extends AppCompatActivity {
     EditText etEmail,etListeAdi;
-    Button btnKaydet;
+    Button btnKaydet, btnVazgec;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -37,6 +37,7 @@ public class RegisterList extends AppCompatActivity {
         etEmail = (EditText) findViewById(R.id.email);
         etListeAdi = (EditText) findViewById(R.id.listeAdi);
         btnKaydet = (Button) findViewById(R.id.add);
+        btnVazgec = (Button) findViewById(R.id.vazgec);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -49,6 +50,13 @@ public class RegisterList extends AppCompatActivity {
 
         gelenListeAdi = intent.getStringExtra("listeAdi");
         gelenUsers = intent.getParcelableArrayListExtra("users");
+
+        btnVazgec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         btnKaydet.setOnClickListener(new View.OnClickListener() {
             @Override

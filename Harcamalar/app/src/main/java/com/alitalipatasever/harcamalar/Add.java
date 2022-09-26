@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class Add extends AppCompatActivity {
 
     EditText ETtutar, ETaciklama;
-    Button btnEkle, btnSil;
+    Button btnEkle, btnSil, btnVazgec;
     FirebaseDatabase database;
     DatabaseReference myRef;
     FirebaseAuth firebaseAuth;
@@ -46,6 +46,7 @@ public class Add extends AppCompatActivity {
         ETtutar = (EditText) findViewById(R.id.tutar);
         btnEkle = (Button) findViewById(R.id.add);
         btnSil = (Button) findViewById(R.id.delete);
+        btnVazgec = (Button) findViewById(R.id.vazgec);
 
         Intent intent = getIntent();
         gelenListeAdi = intent.getStringExtra("listeAdi");
@@ -68,6 +69,13 @@ public class Add extends AppCompatActivity {
 
         String key = database.getReference("Harcamalar").push().getKey();
 
+        btnVazgec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         btnEkle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,29 +84,30 @@ public class Add extends AppCompatActivity {
                 aciklama = ETaciklama.getText().toString();
                 tutar = ETtutar.getText().toString();
 
-                /*myRef.child(key).child("aciklama").setValue(aciklama);
-                myRef.child(key).child("tutar").setValue(tutar);
-                myRef.child(key).child("email").setValue(email);
-                myRef.child(key).child("tarih").setValue(tarih);
-                myRef.child(key).child("id").setValue(key);*/
+                if (aciklama.equals("") || tutar.equals("")){
+                    Toast.makeText(getApplicationContext(), "Açıklama veya tutar boş bırakılamaz!", Toast.LENGTH_SHORT).show();
+                }else {
+                    /*myRef.child(key).child("aciklama").setValue(aciklama);
+                    myRef.child(key).child("tutar").setValue(tutar);
+                    myRef.child(key).child("email").setValue(email);
+                    myRef.child(key).child("tarih").setValue(tarih);
+                    myRef.child(key).child("id").setValue(key);*/
 
-                Harcamalar harcamalar = new Harcamalar();
-                harcamalar.setAciklama(aciklama);
-                harcamalar.setTutar(tutar);
-                harcamalar.setEmail(email);
-                harcamalar.setTarih(tarih);
-                harcamalar.setId(key);
+                    Harcamalar harcamalar = new Harcamalar();
+                    harcamalar.setAciklama(aciklama);
+                    harcamalar.setTutar(tutar);
+                    harcamalar.setEmail(email);
+                    harcamalar.setTarih(tarih);
+                    harcamalar.setId(key);
 
-                myRef.child(gelenListeAdi).child(key).setValue(harcamalar);
+                    myRef.child(gelenListeAdi).child(key).setValue(harcamalar);
 
-                finish();
+                    finish();
+                }
+
+
             }
         });
-
-
-
-        //myRef.setValue("Hello, World!");
-
 
     }
 }

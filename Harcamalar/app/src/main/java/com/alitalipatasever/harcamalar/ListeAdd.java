@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,6 +38,7 @@ public class ListeAdd extends AppCompatActivity {
 
         etListeAdi = (EditText) findViewById(R.id.listeAdi);
         btnListeEkle = (Button) findViewById(R.id.add);
+        btnVazgec = (Button) findViewById(R.id.vazgec);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -53,27 +55,38 @@ public class ListeAdd extends AppCompatActivity {
 
         String key = database.getReference("Harcamalar").push().getKey();
 
+        btnVazgec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         btnListeEkle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 listeAdi = etListeAdi.getText().toString().trim();
 
-                Listeler liste = new Listeler();
-                liste.setEmail(email);
-                liste.setId(key);
-                liste.setlisteAdi(listeAdi);
-                liste.setTarih(tarih);
+                if (listeAdi.equals("")){
+                    Toast.makeText(getApplicationContext(), "Liste Adı boş girilemez!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Listeler liste = new Listeler();
+                    liste.setEmail(email);
+                    liste.setId(key);
+                    liste.setlisteAdi(listeAdi);
+                    liste.setTarih(tarih);
 
-                ArrayList dizi = new ArrayList<>();
-                dizi.add(listeAdi);
+                    ArrayList dizi = new ArrayList<>();
+                    dizi.add(listeAdi);
 
-                //myRef.child(replaceEmail).setValue(liste);
-                myRef.child(listeAdi).setValue(liste);
+                    //myRef.child(replaceEmail).setValue(liste);
+                    myRef.child(listeAdi).setValue(liste);
 
 //                Intent intent = new Intent(ListeAdd.this,ListelerActivity.class);
 //                startActivity(intent);
-                finish();
+                    finish();
+                }
 
             }
         });

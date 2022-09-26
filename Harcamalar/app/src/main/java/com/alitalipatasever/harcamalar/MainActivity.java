@@ -2,8 +2,11 @@ package com.alitalipatasever.harcamalar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     List<Harcamalar> harcamaList;
     String replaceEmail;
+    Context context;
 
 
     @Override
@@ -97,9 +101,28 @@ public class MainActivity extends AppCompatActivity {
         btnListeSil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi);
-                myRef.removeValue();
-                finish();
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.custom_dialog);
+                TextView textView = (TextView)findViewById(R.id.TVtitle);
+                textView.setText("Silmek istediğinize emin misiniz?");
+                Button btnEvet = (Button)dialog.findViewById(R.id.BtnEvet);
+                btnEvet.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi);
+                        myRef.removeValue();
+                        finish();
+                    }
+                });
+                Button btnHayir = (Button)dialog.findViewById(R.id.BtnHayir);
+                btnHayir.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+
             }
         });
 
@@ -116,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("tutar",harcama.getTutar());
                 intent.putExtra("harcamaId",harcama.getId());
                 intent.putExtra("listeAdi",gelenListeAdi);
+                intent.putExtra("email",harcama.getEmail());
                 //intent.putExtra("listeId",gelenListeId);
                 startActivity(intent);
 
