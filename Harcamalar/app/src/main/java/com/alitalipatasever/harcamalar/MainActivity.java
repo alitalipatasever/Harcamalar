@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     List<Harcamalar> harcamaList;
     String replaceEmail;
     Context context;
+    AlertDialog dialog;
 
 
     @Override
@@ -101,10 +102,33 @@ public class MainActivity extends AppCompatActivity {
         btnListeSil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.custom_dialog);
+
+//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//                builder.setTitle("Silmek istediğinize emin misiniz?");
+//                v = getLayoutInflater().inflate(R.layout.activity_custom_dialog,null);
+//                Button btnEvet = v.findViewById(R.id.BtnEvet);
+//                btnEvet.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi);
+//                        myRef.removeValue();
+//                        finish();
+//                    }
+//                });
+//                Button btnHayir = v.findViewById(R.id.BtnHayir);
+//                btnHayir.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//                builder.setView(v);
+//                dialog = builder.create();
+//                dialog.show();
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(R.layout.activity_custom_dialog);
                 TextView textView = (TextView)findViewById(R.id.TVtitle);
-                textView.setText("Silmek istediğinize emin misiniz?");
+                //textView.setText("Silmek istediğinize emin misiniz?");
                 Button btnEvet = (Button)dialog.findViewById(R.id.BtnEvet);
                 btnEvet.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -92,10 +92,10 @@ public class Update extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.custom_dialog);
+                final Dialog dialog = new Dialog(Update.this);
+                dialog.setContentView(R.layout.activity_custom_dialog);
                 TextView textView = (TextView)findViewById(R.id.TVtitle);
-                textView.setText("Silmek istediğinize emin misiniz?");
+                //textView.setText("Silmek istediğinize emin misiniz?");
                 Button btnEvet = (Button)dialog.findViewById(R.id.BtnEvet);
                 btnEvet.setOnClickListener(new View.OnClickListener() {
                     @Override
