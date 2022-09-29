@@ -11,17 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Update extends AppCompatActivity {
@@ -32,7 +33,7 @@ public class Update extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    String email, tarih, gelenListeAdi,gelenId,gelenEmail;
+    String email, tarih, gelenListeAdi,gelenId,gelenEmail,eskiLog;
     Context context;
 
     @Override
@@ -51,7 +52,7 @@ public class Update extends AppCompatActivity {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         tarih = simpleDateFormat.format(new Date());
-        tarih = tarih + " \n"+email+" güncelledi.";
+
 
         db = FirebaseDatabase.getInstance();
         //String readChildKey = db.getReference("Harcamalar").child("").getKey();
@@ -71,7 +72,7 @@ public class Update extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                tarih = tarih + " \n"+email+" güncelledi.";
                 String aciklama = ETaciklama.getText().toString();
                 String tutar = ETtutar.getText().toString();
 
@@ -88,6 +89,18 @@ public class Update extends AppCompatActivity {
             }
         });
 
+        myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi).child("log");
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                eskiLog = dataSnapshot.getValue(String.class);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,12 +109,16 @@ public class Update extends AppCompatActivity {
                 dialog.setContentView(R.layout.activity_custom_dialog);
                 TextView textView = (TextView)findViewById(R.id.TVtitle);
                 //textView.setText("Silmek istediğinize emin misiniz?");
-                Button btnEvet = (Button)dialog.findViewById(R.id.BtnEvet);
+                Button btnEvet = (Button)dialog.findViewById(R.id.BtnTamam);
                 btnEvet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi).child(gelenId);
                         myRef.removeValue();
+                        myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi);
+                        String log = "Id: "+gelenId+" Tarih: "+tarih+" Açıklama: "+gelenAciklama
+                                +" Tutar: "+gelenTutar+" E-mail: "+email+" SİLDİ";
+                        myRef.child("log").setValue(eskiLog+"\n---\n"+log);
                         finish();
                     }
                 });

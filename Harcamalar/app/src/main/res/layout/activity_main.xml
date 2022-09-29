@@ -119,6 +119,19 @@
                             android:layout_height="wrap_content"
                             android:text="Ben: 5 ₺"/>
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:gravity="center">
+                        <TextView
+                            android:id="@+id/tvLog"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Log"/>
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>

@@ -1,7 +1,6 @@
 package com.alitalipatasever.harcamalar;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,10 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,13 +24,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton fabAdd;
-    TextView txtToplam, txtListeAdi, txtKisiToplamHarcama;
+    TextView txtToplam, txtListeAdi, txtKisiToplamHarcama,txtLog;
     Button btnRegisterList,btnListeSil;
 
     FirebaseAuth firebaseAuth;
@@ -42,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> gelenUsers;
     FirebaseDatabase database;
     DatabaseReference myRef;
+    DatabaseReference myRef2;
 
     ListView listView;
     List<Harcamalar> harcamaList;
-    String replaceEmail;
+    String replaceEmail,yeniLog;
+    static String log;
     Context context;
     AlertDialog dialog;
 
@@ -59,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         fabAdd = findViewById(R.id.fabAdd);
         listView = (ListView) findViewById(R.id.listview);
         txtToplam = (TextView) findViewById(R.id.txtToplam);
+        txtLog = (TextView) findViewById(R.id.tvLog);
         txtKisiToplamHarcama = (TextView) findViewById(R.id.kisiToplamHarcama);
         txtListeAdi = (TextView) findViewById(R.id.listeAdi);
         btnRegisterList = (Button) findViewById(R.id.kisiEkle);
@@ -102,34 +101,11 @@ public class MainActivity extends AppCompatActivity {
         btnListeSil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-//                builder.setTitle("Silmek istediğinize emin misiniz?");
-//                v = getLayoutInflater().inflate(R.layout.activity_custom_dialog,null);
-//                Button btnEvet = v.findViewById(R.id.BtnEvet);
-//                btnEvet.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi);
-//                        myRef.removeValue();
-//                        finish();
-//                    }
-//                });
-//                Button btnHayir = v.findViewById(R.id.BtnHayir);
-//                btnHayir.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//                builder.setView(v);
-//                dialog = builder.create();
-//                dialog.show();
                 final Dialog dialog = new Dialog(MainActivity.this);
                 dialog.setContentView(R.layout.activity_custom_dialog);
                 TextView textView = (TextView)findViewById(R.id.TVtitle);
                 //textView.setText("Silmek istediğinize emin misiniz?");
-                Button btnEvet = (Button)dialog.findViewById(R.id.BtnEvet);
+                Button btnEvet = (Button)dialog.findViewById(R.id.BtnTamam);
                 btnEvet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -150,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -170,8 +144,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        txtLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(R.layout.activity_custom_dialog_tamam);
+                TextView textView = (TextView) dialog.findViewById(R.id.TVtitle);
+                textView.setText(yeniLog);
+                Button btnTamam = (Button)dialog.findViewById(R.id.BtnTamam);
+                btnTamam.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        });
+
 
     }
+
 
     @Override
     protected void onResume() {
@@ -212,6 +205,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        myRef2 = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi).child("log");
+        // Read from the database
+        myRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                yeniLog = dataSnapshot.getValue(String.class);
+                //txtLog.setText(yeniLog);
+                //Toast.makeText(MainActivity.this, yeniLog, Toast.LENGTH_SHORT).show();
+
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
             }
         });
 
