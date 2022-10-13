@@ -21,7 +21,7 @@ public class RegisterList extends AppCompatActivity {
     Button btnKaydet, btnVazgec;
 
     FirebaseDatabase database;
-    DatabaseReference myRef;
+    DatabaseReference myRef,myRef2;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
@@ -45,6 +45,7 @@ public class RegisterList extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Harcamalar");
+        myRef2 = database.getReference("Listeler");
 
         Intent intent = getIntent();
 
@@ -74,6 +75,7 @@ public class RegisterList extends AppCompatActivity {
                 user.setUserEmail(email);
                 arrayList.add(user);
                 myRef.child(gelenListeAdi).child(replaceEmail).setValue(replaceEmail);
+                myRef2.child(gelenListeAdi).child(replaceEmail).setValue(replaceEmail);
                 finish();
             }
         });

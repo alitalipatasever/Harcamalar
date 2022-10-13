@@ -76,7 +76,7 @@ public class ListelerActivity extends AppCompatActivity {
         replaceEmail = replaceEmail1.replace(".","_");
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Harcamalar").child("");
+        myRef = database.getReference("Listeler").child("");
 
         listeList = new ArrayList<>();
 
@@ -127,10 +127,11 @@ public class ListelerActivity extends AppCompatActivity {
                     try {
                         Listeler listeler1 = dataSnapshot.getValue(Listeler.class);
 
-                        if (listeler1.email.equals(normalEmail) ||
-                                dataSnapshot.getValue().toString().contains(replaceEmail)) {
-                            listeList.add(listeler1);
-                        }
+//                        if (listeler1.email.equals(normalEmail) ||
+//                                dataSnapshot.getValue().toString().contains(replaceEmail)) {
+//                            listeList.add(listeler1);
+//                        }
+                        listeList.add(listeler1);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         myRef = FirebaseDatabase.getInstance().getReference("Harcamalar").child(gelenListeAdi);
                         myRef.removeValue();
+                        myRef2 = FirebaseDatabase.getInstance().getReference("Listeler").child(gelenListeAdi);
+                        myRef2.removeValue();
                         finish();
                     }
                 });

@@ -22,8 +22,8 @@ public class ListeAdd extends AppCompatActivity {
 
     EditText etListeAdi;
     Button btnListeEkle, btnVazgec;
-    FirebaseDatabase database;
-    DatabaseReference myRef;
+    FirebaseDatabase database,database2;
+    DatabaseReference myRef,myRef2;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     String listeAdi, tarih, email;
@@ -52,6 +52,9 @@ public class ListeAdd extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Harcamalar");
+        database2 = FirebaseDatabase.getInstance();
+        myRef2 = database2.getReference("Listeler");
+
 
         String key = database.getReference("Harcamalar").push().getKey();
 
@@ -82,6 +85,7 @@ public class ListeAdd extends AppCompatActivity {
 
                     //myRef.child(replaceEmail).setValue(liste);
                     myRef.child(listeAdi).setValue(liste);
+                    myRef2.child(listeAdi).setValue(liste);
 
 //                Intent intent = new Intent(ListeAdd.this,ListelerActivity.class);
 //                startActivity(intent);
