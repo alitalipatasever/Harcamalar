@@ -129,7 +129,6 @@
                         android:padding="5dp"
                         android:gravity="center">
                         <Button
-                            android:id="@+id/listeSil"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:background="@drawable/baseline_info_24"/>
