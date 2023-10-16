@@ -31,7 +31,7 @@ import java.util.List;
 public class ListelerActivity extends AppCompatActivity {
 
     ImageButton btnProfile;
-    String email,gelenListeAdi, str, replaceEmail, normalEmail;
+    String email,gelenListeAdi, str, replaceEmail, normalEmail,loginEmail;
     Button btnListeKayit, btnYeniListe;
     TextView txtEmail;
 
@@ -61,6 +61,7 @@ public class ListelerActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         email = firebaseAuth.getCurrentUser().getEmail();
+        loginEmail = email;
         normalEmail = email;
         //Email ön ad
         String[] For_split_email = email.split("[@]");
@@ -72,7 +73,7 @@ public class ListelerActivity extends AppCompatActivity {
         email = For_split_email[0];
         txtEmail.setText(email);
 
-        String replaceEmail1 = email.replace("@","_");
+        String replaceEmail1 = loginEmail.replace("@","_");
         replaceEmail = replaceEmail1.replace(".","_");
 
         database = FirebaseDatabase.getInstance();
@@ -131,7 +132,10 @@ public class ListelerActivity extends AppCompatActivity {
 //                                dataSnapshot.getValue().toString().contains(replaceEmail)) {
 //                            listeList.add(listeler1);
 //                        }
-                        listeList.add(listeler1);
+                        if (listeler1.email.equals(normalEmail) || dataSnapshot.getValue().toString().contains(replaceEmail)) {
+                            listeList.add(listeler1);
+                        }
+                        //listeList.add(listeler1);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
