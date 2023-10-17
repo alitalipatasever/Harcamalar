@@ -127,11 +127,7 @@ public class ListelerActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     try {
                         Listeler listeler1 = dataSnapshot.getValue(Listeler.class);
-
-//                        if (listeler1.email.equals(normalEmail) ||
-//                                dataSnapshot.getValue().toString().contains(replaceEmail)) {
-//                            listeList.add(listeler1);
-//                        }
+//
                         if (listeler1.email.equals(normalEmail) || dataSnapshot.getValue().toString().contains(replaceEmail)) {
                             listeList.add(listeler1);
                         }

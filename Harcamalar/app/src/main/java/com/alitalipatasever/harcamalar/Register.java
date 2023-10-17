@@ -41,8 +41,8 @@ public class Register extends AppCompatActivity {
                 username = ETusername.getText().toString();
                 password = ETpassword.getText().toString();
 
-                if(username.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"Kullanıcı adı şifre alanları boş bırakılamaz!",Toast.LENGTH_SHORT).show();
+                if(username.isEmpty() || password.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"Kullanıcı e-mail şifre alanları boş bırakılamaz!",Toast.LENGTH_SHORT).show();
                 }else{
                     registerFunc();
                 }
@@ -61,6 +61,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(),"Kullanıcınız Oluşturuldu. Lütfen Giriş Yapınız!",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Register.this,Login.class);
                     startActivity(intent);
                     finish();

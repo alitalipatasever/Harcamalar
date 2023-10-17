@@ -43,8 +43,10 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 username = ETusername.getText().toString().trim();
                 password = ETpassword.getText().toString().trim();
-                if(username.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"Kullanıcı adı şifre alanları boş bırakılamaz!",Toast.LENGTH_SHORT).show();
+                if(username.isEmpty() ){
+                    Toast.makeText(getApplicationContext(),"Lütfen Kullanıcı Adınızı Giriniz!",Toast.LENGTH_SHORT).show();
+                }if (password.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"Lütfen Şifrenizi Giriniz!",Toast.LENGTH_SHORT).show();
                 }else{
                     loginFunc();
                 }

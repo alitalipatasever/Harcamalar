@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton fabAdd;
     TextView txtToplam, txtListeAdi, txtKisiToplamHarcama,txtLog;
+    LinearLayout lytKisiEkle, lytListeSil, lytLog;
     Button btnRegisterList,btnListeSil;
 
     FirebaseAuth firebaseAuth;
@@ -57,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
         fabAdd = findViewById(R.id.fabAdd);
         listView = (ListView) findViewById(R.id.listview);
         txtToplam = (TextView) findViewById(R.id.txtToplam);
-        txtLog = (TextView) findViewById(R.id.tvLog);
         txtKisiToplamHarcama = (TextView) findViewById(R.id.kisiToplamHarcama);
         txtListeAdi = (TextView) findViewById(R.id.listeAdi);
-        btnRegisterList = (Button) findViewById(R.id.kisiEkle);
-        btnListeSil = (Button) findViewById(R.id.listeSil);
+        lytKisiEkle = (LinearLayout) findViewById(R.id.lytKisiEkle);
+        lytListeSil = (LinearLayout) findViewById(R.id.lytListeSil);
+        lytLog = (LinearLayout) findViewById(R.id.lytLog);
 
         harcamaList = new ArrayList<>();
 
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Harcamalar").child(gelenListeAdi);
 
-        btnRegisterList.setOnClickListener(new View.OnClickListener() {
+        lytKisiEkle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,RegisterList.class);
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btnListeSil.setOnClickListener(new View.OnClickListener() {
+        lytListeSil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(MainActivity.this);
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        txtLog.setOnClickListener(new View.OnClickListener() {
+        lytLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(MainActivity.this);
@@ -198,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 txtToplam.setText(String.valueOf(toplamTutar).replace(".0","")+" ₺");
-                txtKisiToplamHarcama.setText("Ben: "+String.valueOf(kisiToplamHarcama).replace(".0","")+" ₺");
+                txtKisiToplamHarcama.setText(String.valueOf(kisiToplamHarcama).replace(".0","")+"₺");
 
                 CustomAdapter adapter = new CustomAdapter(MainActivity.this, harcamaList);
                 listView.setAdapter(adapter);
